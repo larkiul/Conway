@@ -38,16 +38,16 @@ public class Conways_Game_Of_Life
 
         for (int m = 0; m < dimension; m++){
             for (int n = 0; n < dimension; n++){
-                table[m][n] = " ■";
+                table[m][n] = " □";
 
                 System.out.print(table[m][n] + " ");
             }
             System.out.println();
         }
-
+        startGame = keyboard.nextLine();
 
         while (startGame.equals(start)){
-            startGame = keyboard.nextLine();
+            //startGame = keyboard.nextLine();
             /*for (int m = 0; m < dimension; m++){
                 for (int n = 0; n < dimension; n++){
                     table[m][n] = " ■";
@@ -71,7 +71,7 @@ public class Conways_Game_Of_Life
                         System.out.print(table[m][n] + " ");
                     }
                     else{
-                        table[m][n] = " □";
+                        table[m][n] = " ■";
                         System.out.print(table[m][n] + " ");
                     }
 
