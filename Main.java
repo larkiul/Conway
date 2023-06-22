@@ -4,3 +4,5 @@ public class Main {
         Conways_Game_Of_Life game = new Conways_Game_Of_Life(new Scanner(System.in));
     }
 }
+
+// hi
