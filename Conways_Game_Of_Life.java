@@ -20,7 +20,7 @@ public class Conways_Game_Of_Life
     private int xAxis = 1;
     private int yAxis = 1;
     
-    String startGame = new String("start");
+    int startGame;
     String start = new String("start");
     private boolean begin = false;
     
@@ -34,23 +34,23 @@ public class Conways_Game_Of_Life
         keyboard = kb;
 
         System.out.println("Welcome to Conway's Game of Life!");
-        System.out.println("Please enter 'start' to begin");
+        System.out.println("How many generations?");
 
         for (int m = 0; m < dimension; m++){
             for (int n = 0; n < dimension; n++){
                 table[m][n] = " □";
 
-                System.out.print(table[m][n] + " ");
+                //System.out.print(table[m][n] + " ");
             }
-            System.out.println();
+            //System.out.println();
         }
-        startGame = keyboard.nextLine();
+        startGame = keyboard.nextInt();
 
-        while (startGame.equals(start)){
+        while (z <= startGame){
             //startGame = keyboard.nextLine();
             /*for (int m = 0; m < dimension; m++){
                 for (int n = 0; n < dimension; n++){
-                    table[m][n] = " ■";
+                    table[m][n] = " □";
                     
                     System.out.print(table[m][n] + " ");
                 }
@@ -62,7 +62,7 @@ public class Conways_Game_Of_Life
             x = keyboard.nextInt();
             System.out.println("Y coordinate:");
             y = keyboard.nextInt();
-
+            /*bruno*/
             for (int m = 0; m < dimension; m++){
 
                 for (int n = 0; n < dimension; n++){
@@ -77,8 +77,9 @@ public class Conways_Game_Of_Life
 
                 }
                 System.out.println();
-                z++;
+
             }
+            z++;
         }
     }
 
