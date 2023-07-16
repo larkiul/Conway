@@ -1,4 +1,4 @@
-/**
+package Conway; /**
  * Write a description of class Conways_Game_Of_Life here.
  *
  * @author (your name)
@@ -20,13 +20,15 @@ public class Conways_Game_Of_Life
     private int xAxis = 1;
     private int yAxis = 1;
     
-    int startGame;
+    int generations;
+    private int units;
     String start = new String("start");
     private boolean begin = false;
-    
+
     /**
      * Constructor for objects of class Conways_Game_Of_Life
      */
+
     public Conways_Game_Of_Life(Scanner kb)
     {
         // initialise instance variables
@@ -35,27 +37,16 @@ public class Conways_Game_Of_Life
 
         System.out.println("Welcome to Conway's Game of Life!");
         System.out.println("How many generations?");
+        generations = keyboard.nextInt();
+        System.out.println("How many units would you like to place?");
+        units = keyboard.nextInt();
 
         for (int m = 0; m < dimension; m++){
             for (int n = 0; n < dimension; n++){
                 table[m][n] = " □";
-
-                //System.out.print(table[m][n] + " ");
             }
-            //System.out.println();
         }
-        startGame = keyboard.nextInt();
-
-        while (z <= startGame){
-            //startGame = keyboard.nextLine();
-            /*for (int m = 0; m < dimension; m++){
-                for (int n = 0; n < dimension; n++){
-                    table[m][n] = " □";
-                    
-                    System.out.print(table[m][n] + " ");
-                }
-                System.out.println();
-            }*/
+        while (z <= units){
 
             System.out.println("Enter coordinates to place a unit");
             System.out.println("X coordinate:");
@@ -63,6 +54,30 @@ public class Conways_Game_Of_Life
             System.out.println("Y coordinate:");
             y = keyboard.nextInt();
             /*bruno*/
+            for (int m = 0; m < dimension; m++){
+
+                for (int n = 0; n < dimension; n++){
+                    if (n != x - 1 || m != y - 1) {
+
+                        System.out.print(table[m][n] + " ");
+                    }
+                    else{
+                        table[m][n] = " ■";
+                        System.out.print(table[m][n] + " ");
+                    }
+
+                }
+                System.out.println();
+
+            }
+            z++;
+        }
+
+        z = 1;
+        while (z <= generations){
+
+
+            System.out.println("Gen " + z);
             for (int m = 0; m < dimension; m++){
 
                 for (int n = 0; n < dimension; n++){
