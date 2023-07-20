@@ -9,21 +9,22 @@ import java.util.Scanner; //Keyboard input
 public class Conways_Game_Of_Life
 {
     // instance variables - replace the example below with your own
-    private int x;
+    private int xCoordinate;
 
-    private int y;
+    private int yCoordinate;
 
     private int z;
     private int dimension = 20;
     private String table[][] = new String[dimension][dimension];  
     Scanner keyboard;
-    private int xAxis = 1;
-    private int yAxis = 1;
     
-    int generations;
+    private int generations;
     private int units;
-    String start = new String("start");
-    private boolean begin = false;
+
+    private int unitBirth;
+    private int unitDeath;
+    private int count = 0;
+
 
     /**
      * Constructor for objects of class Conways_Game_Of_Life
@@ -41,29 +42,29 @@ public class Conways_Game_Of_Life
         System.out.println("How many units would you like to place?");
         units = keyboard.nextInt();
 
-        for (int m = 0; m < dimension; m++){
-            for (int n = 0; n < dimension; n++){
-                table[m][n] = " □";
+        for (int y = 0; y < dimension; y++){
+            for (int x = 0; x < dimension; x++){
+                table[y][x] = " □";
             }
         }
         while (z <= units){
 
             System.out.println("Enter coordinates to place a unit");
             System.out.println("X coordinate:");
-            x = keyboard.nextInt();
+            xCoordinate = keyboard.nextInt();
             System.out.println("Y coordinate:");
-            y = keyboard.nextInt();
+            yCoordinate = keyboard.nextInt();
             /*bruno*/
-            for (int m = 0; m < dimension; m++){
+            for (int y = 0; y < dimension; y++){
 
-                for (int n = 0; n < dimension; n++){
-                    if (n != x - 1 || m != y - 1) {
+                for (int x = 0; x < dimension; x++){
+                    if (x != xCoordinate - 1 || y != yCoordinate - 1) {
 
-                        System.out.print(table[m][n] + " ");
+                        System.out.print(table[y][x] + " ");
                     }
                     else{
-                        table[m][n] = " ■";
-                        System.out.print(table[m][n] + " ");
+                        table[y][x] = " ■";
+                        System.out.print(table[y][x] + " ");
                     }
 
                 }
@@ -78,16 +79,20 @@ public class Conways_Game_Of_Life
 
 
             System.out.println("Gen " + z);
-            for (int m = 0; m < dimension; m++){
+            for (int y = 0; y < dimension; y++){
 
-                for (int n = 0; n < dimension; n++){
-                    if (n != x - 1 || m != y - 1) {
+                for (int x = 0; x < dimension; x++){
 
-                        System.out.print(table[m][n] + " ");
+                    if (x != xCoordinate - 1 || y != yCoordinate - 1) {
+
+                        System.out.print(table[y][x] + " ");
                     }
                     else{
-                        table[m][n] = " ■";
-                        System.out.print(table[m][n] + " ");
+                        table[y][x] = " ■";
+                        System.out.print(table[y][x] + " ");
+                    }
+                    if (table[y + 1][x] == "■"){
+                        count++;
                     }
 
                 }
@@ -96,6 +101,7 @@ public class Conways_Game_Of_Life
             }
             z++;
         }
+        System.out.println(count);
     }
 
     /**
