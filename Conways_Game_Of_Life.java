@@ -37,8 +37,6 @@ public class Conways_Game_Of_Life
         keyboard = kb;
 
         System.out.println("Welcome to Conway's Game of Life!");
-        System.out.println("How many generations?");
-        generations = keyboard.nextInt();
         System.out.println("How many units would you like to place?");
         units = keyboard.nextInt();
 
@@ -73,27 +71,58 @@ public class Conways_Game_Of_Life
             }
             z++;
         }
-
+        System.out.println("How many generations?");
+        generations = keyboard.nextInt();
         z = 1;
         while (z <= generations){
 
 
             System.out.println("Gen " + z);
-            for (int y = 0; y < dimension; y++){
+            for (int y = 1; y < dimension - 1; y++){
 
-                for (int x = 0; x < dimension; x++){
+                for (int x = 1; x < dimension - 1; x++){
 
-                    if (x != xCoordinate - 1 || y != yCoordinate - 1) {
-
-                        System.out.print(table[y][x] + " ");
-                    }
-                    else{
-                        table[y][x] = " ■";
-                        System.out.print(table[y][x] + " ");
+                    if (table[y + 1][x + 1] == "■"){
+                        count++;
+                        System.out.println(count);
                     }
                     if (table[y + 1][x] == "■"){
                         count++;
+                        System.out.println(count);
                     }
+                    if (table[y][x + 1] == "■"){
+                        count++;
+                        System.out.println(count);
+                    }
+                    if (table[y + 1][x - 1] == "■"){
+                        count++;
+                        System.out.println(count);
+                    }
+                    if (table[y - 1][x + 1] == "■"){
+                        count++;
+                        System.out.println(count);
+                    }
+                    if (table[y + 1][x] == "■"){
+                        count++;
+                        System.out.println(count);
+                    }
+                    if (table[y + 1][x] == "■"){
+                        count++;
+                        System.out.println(count);
+                    }
+                    if (table[y + 1][x] == "■"){
+                        count++;
+                        System.out.println(count);
+                    }
+                    if (x != xCoordinate - 1 || y != yCoordinate - 1) {
+
+                        System.out.print(table[y + 1][x + 1] + " ");
+                    }
+                    else{
+                        table[y + 1][x + 1] = " ■";
+                        System.out.print(table[x][y] + " ");
+                    }
+
 
                 }
                 System.out.println();
