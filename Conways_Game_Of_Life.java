@@ -21,7 +21,7 @@ public class Conways_Game_Of_Life
     private int units;
 
     private int unitBirth;
-    private int unitDeath;
+    private int unitDeat;
     private int count = 0;
 
 
