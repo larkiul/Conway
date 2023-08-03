@@ -14,8 +14,7 @@ public class Conways_Game_Of_Life
     private int yCoordinate;
 
     private int z;
-    private int dimension = 20;
-    private String table[][] = new String[dimension][dimension];  
+    private String table[][] = new String[21][21];
     Scanner keyboard;
     
     private int generations;
@@ -40,8 +39,8 @@ public class Conways_Game_Of_Life
         System.out.println("How many units would you like to place?");
         units = keyboard.nextInt();
 
-        for (int y = 0; y < dimension; y++){
-            for (int x = 0; x < dimension; x++){
+        for (int y = 0; y < 20; y++){
+            for (int x = 0; x < 20; x++){
                 table[y][x] = " □";
             }
         }
@@ -53,16 +52,18 @@ public class Conways_Game_Of_Life
             System.out.println("Y coordinate:");
             yCoordinate = keyboard.nextInt();
             /*bruno*/
-            for (int y = 0; y < dimension; y++){
+            for (int y = 0; y < 20; y++){
 
-                for (int x = 0; x < dimension; x++){
+                for (int x = 0; x < 20; x++){
                     if (x != xCoordinate - 1 || y != yCoordinate - 1) {
 
                         System.out.print(table[y][x] + " ");
                     }
                     else{
+
                         table[y][x] = " ■";
                         System.out.print(table[y][x] + " ");
+                        table[y + 1][x + 1] = " □";
                     }
 
                 }
@@ -78,9 +79,9 @@ public class Conways_Game_Of_Life
 
 
             System.out.println("Gen " + z);
-            for (int y = 1; y < dimension - 1; y++){
+            for (int y = 1; y < 20; y++){
 
-                for (int x = 1; x < dimension - 1; x++){
+                for (int x = 1; x < 20; x++){
 
                     if (table[y + 1][x + 1] == "■"){
                         count++;
@@ -116,10 +117,12 @@ public class Conways_Game_Of_Life
                     }
                     if (x != xCoordinate - 1 || y != yCoordinate - 1) {
 
-                        System.out.print(table[y + 1][x + 1] + " ");
+                        System.out.print(table[y][x] + " ");
                     }
+
                     else{
-                        table[y + 1][x + 1] = " ■";
+                        table[y][x] = " ■";
+
                         System.out.print(table[x][y] + " ");
                     }
 
