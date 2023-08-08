@@ -13,8 +13,10 @@ public class Conways_Game_Of_Life
 
     private int yCoordinate;
 
+    final int SIZE = 21;
+
     private int z;
-    private String table[][] = new String[21][21];
+    private String table[][] = new String[SIZE][SIZE];
     Scanner keyboard;
     
     private int generations;
@@ -39,6 +41,7 @@ public class Conways_Game_Of_Life
         System.out.println("How many units would you like to place?");
         units = keyboard.nextInt();
 
+
         for (int y = 0; y < 20; y++){
             for (int x = 0; x < 20; x++){
                 table[y][x] = " □";
@@ -52,6 +55,8 @@ public class Conways_Game_Of_Life
             System.out.println("Y coordinate:");
             yCoordinate = keyboard.nextInt();
             /*bruno*/
+            System.out.println(xCoordinate);
+            System.out.println(yCoordinate);
             for (int y = 0; y < 20; y++){
 
                 for (int x = 0; x < 20; x++){
@@ -63,7 +68,7 @@ public class Conways_Game_Of_Life
 
                         table[y][x] = " ■";
                         System.out.print(table[y][x] + " ");
-                        table[y + 1][x + 1] = " □";
+                        table[y - 1][x - 1] = " □";
                     }
 
                 }
@@ -79,11 +84,13 @@ public class Conways_Game_Of_Life
 
 
             System.out.println("Gen " + z);
-            for (int y = 1; y < 20; y++){
+            System.out.println(xCoordinate);
+            System.out.println(yCoordinate);
+            for (int y = 0; y < 20; y++){
 
-                for (int x = 1; x < 20; x++){
+                for (int x = 0; x < 20; x++){
 
-                    if (table[y + 1][x + 1] == "■"){
+                    /*if (table[y + 1][x + 1] == "■"){
                         count++;
                         System.out.println(count);
                     }
@@ -114,16 +121,16 @@ public class Conways_Game_Of_Life
                     if (table[y + 1][x] == "■"){
                         count++;
                         System.out.println(count);
-                    }
-                    if (x != xCoordinate - 1 || y != yCoordinate - 1) {
+                    }*/
+                    if (x != xCoordinate || y != yCoordinate) {
 
                         System.out.print(table[y][x] + " ");
                     }
 
                     else{
-                        table[y][x] = " ■";
+                        //table[y + 1][x + 1] = " ■";
 
-                        System.out.print(table[x][y] + " ");
+                        System.out.print(table[y][x] + " ");
                     }
 
 
