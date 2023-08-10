@@ -42,8 +42,8 @@ public class Conways_Game_Of_Life
         units = keyboard.nextInt();
 
 
-        for (int y = 0; y < 20; y++){
-            for (int x = 0; x < 20; x++){
+        for (int y = 0; y < SIZE - 1; y++){
+            for (int x = 0; x < SIZE - 1; x++){
                 table[y][x] = " □";
             }
         }
@@ -54,27 +54,9 @@ public class Conways_Game_Of_Life
             xCoordinate = keyboard.nextInt();
             System.out.println("Y coordinate:");
             yCoordinate = keyboard.nextInt();
-            /*bruno*/
-            System.out.println(xCoordinate);
-            System.out.println(yCoordinate);
-            for (int y = 0; y < 20; y++){
 
-                for (int x = 0; x < 20; x++){
-                    if (x != xCoordinate - 1 || y != yCoordinate - 1) {
+            drawTable();
 
-                        System.out.print(table[y][x] + " ");
-                    }
-                    else{
-
-                        table[y][x] = " ■";
-                        System.out.print(table[y][x] + " ");
-                        table[y - 1][x - 1] = " □";
-                    }
-
-                }
-                System.out.println();
-
-            }
             z++;
         }
         System.out.println("How many generations?");
@@ -82,76 +64,37 @@ public class Conways_Game_Of_Life
         z = 1;
         while (z <= generations){
 
-
+            /*if (table[y + 1][x + 1] == "■"){
+                count++;
+                System.out.println(count);
+            }*/
             System.out.println("Gen " + z);
-            System.out.println(xCoordinate);
-            System.out.println(yCoordinate);
-            for (int y = 0; y < 20; y++){
+            drawTable();
 
-                for (int x = 0; x < 20; x++){
-
-                    /*if (table[y + 1][x + 1] == "■"){
-                        count++;
-                        System.out.println(count);
-                    }
-                    if (table[y + 1][x] == "■"){
-                        count++;
-                        System.out.println(count);
-                    }
-                    if (table[y][x + 1] == "■"){
-                        count++;
-                        System.out.println(count);
-                    }
-                    if (table[y + 1][x - 1] == "■"){
-                        count++;
-                        System.out.println(count);
-                    }
-                    if (table[y - 1][x + 1] == "■"){
-                        count++;
-                        System.out.println(count);
-                    }
-                    if (table[y + 1][x] == "■"){
-                        count++;
-                        System.out.println(count);
-                    }
-                    if (table[y + 1][x] == "■"){
-                        count++;
-                        System.out.println(count);
-                    }
-                    if (table[y + 1][x] == "■"){
-                        count++;
-                        System.out.println(count);
-                    }*/
-                    if (x != xCoordinate || y != yCoordinate) {
-
-                        System.out.print(table[y][x] + " ");
-                    }
-
-                    else{
-                        //table[y + 1][x + 1] = " ■";
-
-                        System.out.print(table[y][x] + " ");
-                    }
-
-
-                }
-                System.out.println();
-
-            }
             z++;
         }
         System.out.println(count);
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-    /*public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
-    }*/
+    public void drawTable(){
+
+        for (int y = 0; y < SIZE - 1; y++){
+
+            for (int x = 0; x < SIZE - 1; x++){
+
+                if (x != xCoordinate - 1 || y != yCoordinate - 1) {
+
+                    System.out.print(table[y][x] + " ");
+                }
+                else{
+
+                    table[y][x] = " ■";
+                    System.out.print(table[y][x] + " ");
+
+                }
+            }
+            System.out.println();
+        }
+
+    }
 }
