@@ -13,10 +13,10 @@ public class Conways_Game_Of_Life
 
     private int yCoordinate;
 
-    final int SIZE = 21;
+    private int size = 21;
 
     private int z;
-    private String table[][] = new String[SIZE][SIZE];
+    private String table[][] = new String[size][size];
     Scanner keyboard;
     
     private int generations;
@@ -42,8 +42,8 @@ public class Conways_Game_Of_Life
         units = keyboard.nextInt();
 
 
-        for (int y = 0; y < SIZE - 1; y++){
-            for (int x = 0; x < SIZE - 1; x++){
+        for (int y = 0; y < size - 1; y++){
+            for (int x = 0; x < size - 1; x++){
                 table[y][x] = " □";
             }
         }
@@ -64,13 +64,8 @@ public class Conways_Game_Of_Life
         z = 1;
         while (z <= generations){
 
-            /*if (table[y + 1][x + 1] == "■"){
-                count++;
-                System.out.println(count);
-            }*/
             System.out.println("Gen " + z);
             drawTable();
-
             z++;
         }
         System.out.println(count);
@@ -78,10 +73,24 @@ public class Conways_Game_Of_Life
 
     public void drawTable(){
 
-        for (int y = 0; y < SIZE - 1; y++){
+        for (int y = 0; y < size - 1; y++){
 
-            for (int x = 0; x < SIZE - 1; x++){
+            for (int x = 0; x < size - 1; x++){
 
+                if (z <= generations){
+
+                    if (table[y + 1][x + 1] == "■"
+                        || table[y][x + 1] == "■"
+                        || table[y + 1][x] == "■"
+                        || table[y - 1][x - 1] == "■"
+                        || table[y - 1][x] == "■"
+                        || table[y][x - 1] == "■"
+                        || table[y - 1][x + 1] == "■"
+                        || table[y + 1][x - 1] == "■"){
+                        count++;
+                        System.out.println(count);
+                    }
+                }
                 if (x != xCoordinate - 1 || y != yCoordinate - 1) {
 
                     System.out.print(table[y][x] + " ");
