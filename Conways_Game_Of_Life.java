@@ -16,7 +16,7 @@ public class Conways_Game_Of_Life
     private int size = 21;
 
     private int z;
-    private String table[][] = new String[size][size];
+    private char table[][] = new char[size][size];
     Scanner keyboard;
     
     private int generations;
@@ -24,7 +24,7 @@ public class Conways_Game_Of_Life
 
     private int unitBirth;
     private int unitDeat;
-    private int count = 0;
+    //private int count;
 
 
     /**
@@ -44,7 +44,7 @@ public class Conways_Game_Of_Life
 
         for (int y = 0; y < size - 1; y++){
             for (int x = 0; x < size - 1; x++){
-                table[y][x] = " □";
+                table[y][x] = '□';
             }
         }
         while (z <= units){
@@ -68,36 +68,55 @@ public class Conways_Game_Of_Life
             drawTable();
             z++;
         }
-        System.out.println(count);
+
     }
 
     public void drawTable(){
 
-        for (int y = 0; y < size - 1; y++){
+        for (int y = 1; y < size - 1; y++){
 
-            for (int x = 0; x < size - 1; x++){
+            for (int x = 1; x < size - 1; x++) {
+
+                int count = 0;
+
+                if (table[y + 1][x + 1] == '■') {
+                    count++;
+                }
+                if (table[y][x + 1] == '■') {
+                    count++;
+                }
+                if (table[y + 1][x] == '■') {
+                    count++;
+                }
+                if (table[y - 1][x + 1] == '■') {
+                    count++;
+                }
+                if (table[y + 1][x - 1] == '■') {
+                    count++;
+                }
+                if (table[y - 1][x - 1] == '■') {
+                    count++;
+                }
+                if (table[y][x - 1] == '■') {
+                    count++;
+                }
+                if (table[y - 1][x] == '■') {
+                    count++;
+                }
 
                 if (z <= generations){
-
-                    if (table[y + 1][x + 1] == "■"
-                        || table[y][x + 1] == "■"
-                        || table[y + 1][x] == "■"
-                        || table[y - 1][x - 1] == "■"
-                        || table[y - 1][x] == "■"
-                        || table[y][x - 1] == "■"
-                        || table[y - 1][x + 1] == "■"
-                        || table[y + 1][x - 1] == "■"){
-                        count++;
-                        System.out.println(count);
+                    if (count < 2) {
+                        table[y][x] = '□';
                     }
                 }
-                if (x != xCoordinate - 1 || y != yCoordinate - 1) {
+
+                if (x != xCoordinate || y != yCoordinate) {
 
                     System.out.print(table[y][x] + " ");
                 }
                 else{
 
-                    table[y][x] = " ■";
+                    table[y][x] = '■';
                     System.out.print(table[y][x] + " ");
 
                 }
