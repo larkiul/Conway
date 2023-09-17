@@ -23,7 +23,7 @@ public class Conways_Game_Of_Life
     private int units;
 
     private int unitBirth;
-    private int unitDeat;
+    private int unitDeath;
     //private int count;
 
 
@@ -104,7 +104,7 @@ public class Conways_Game_Of_Life
                     count++;
                 }
 
-                if (z <= generations){
+                if (z <= generations && z > 1){
                     if (count < 2) {
                         table[y][x] = '□';
                     }
