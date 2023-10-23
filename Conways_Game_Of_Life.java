@@ -7,13 +7,20 @@
 
 import java.util.ArrayList; 
 import java.util.Scanner; //Keyboard input
+import java.io.IOException; // handle errors
+import java.io.File;  //  File handles
+import java.util.Objects;
+
 public class Conways_Game_Of_Life
 {
     // instance variables - replace the example below with your own
     /*public static void main(String[] args) {
         Conways_Game_Of_Life game = new Conways_Game_Of_Life(new Scanner(kb));
     }*/
-
+    
+    
+    
+    private String fileName;
     
     private int xCoordinate;
 
@@ -44,30 +51,60 @@ public class Conways_Game_Of_Life
 
         z = 1;
         
+        String loadCSV;
         
         
 
         System.out.println("Welcome to Conway's Game of Life!");
-        System.out.println("How many units would you like to place?");
-        units = keyboard.nextInt();
-
-
+        System.out.println("Would you like to load a CSV file? (yes / no)");
+        loadCSV = keyboard.nextLine();
+        
+        
         for (int y = 0; y < size - 1; y++){
-            for (int x = 0; x < size - 1; x++){
-                table[y][x] = '□';
-            }
+                for (int x = 0; x < size - 1; x++){
+                    table[y][x] = '□';
+                }
         }
-        while (z <= units){
-
-            System.out.println("Enter coordinates to place a unit");
-            System.out.println("X coordinate:");
-            xCoordinate = keyboard.nextInt();
-            System.out.println("Y coordinate:");
-            yCoordinate = keyboard.nextInt();
-
-            drawTable();
-
-            z++;
+        
+        if (Objects.equals(loadCSV, "yes")){
+            System.out.println("What is the name of the file?");
+            fileName = keyboard.nextLine();
+            try {
+                File file = new File(fileName + ".csv");
+                System.out.println(file);
+                Scanner readTheFile = new Scanner(file);
+                readTheFile.useDelimiter(",");
+                while (readTheFile.hasNext()){
+                    //System.out.println(readTheFile.nextLine());
+                    int x = readTheFile.nextInt();
+                    int y = readTheFile.nextInt();
+                    table[y][x] = '■';
+                }
+                
+            } catch(IOException e) {
+                System.out.println("File couldn't be loaded");
+                System.out.println("Please reload the program");
+                System.exit(0);
+            }
+        } else if (Objects.equals(loadCSV, "no")){
+            System.out.println("How many units would you like to place?");
+            units = keyboard.nextInt();
+            while (z <= units){
+    
+                System.out.println("Enter coordinates to place a unit");
+                System.out.println("X coordinate:");
+                xCoordinate = keyboard.nextInt();
+                System.out.println("Y coordinate:");
+                yCoordinate = keyboard.nextInt();
+    
+                drawTable();
+    
+                z++;
+            }
+        } else {
+            System.out.println("Sorry, that is not a valid answer");
+            System.out.println("Please reload the program");
+            System.exit(0);
         }
         System.out.println("How many generations?");
         generations = keyboard.nextInt();
@@ -87,6 +124,11 @@ public class Conways_Game_Of_Life
                 table[unitBirth.get(1)][unitBirth.get(0)] = '■';
                 unitBirth.remove(0);
                 unitBirth.remove(0);
+            }
+            try {
+                Thread.sleep((long) (300));
+            } catch (InterruptedException ie) {
+                Thread.currentThread().interrupt();
             }
         }
 
@@ -144,6 +186,7 @@ public class Conways_Game_Of_Life
                     }
                     yCoordinate = 0;
                     xCoordinate = 0;
+                    
                 }
                 
                 if (x != xCoordinate || y != yCoordinate) {
@@ -158,6 +201,7 @@ public class Conways_Game_Of_Life
                 }
             }
             System.out.println();
+            
         }
     }
 }
