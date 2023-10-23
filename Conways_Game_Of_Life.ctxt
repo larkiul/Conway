@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=Conways_Game_Of_Life
+comment1.params=
+comment1.target=Conways_Game_Of_Life()
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Conways_Game_Of_Life\r\n
+comment2.params=
+comment2.target=void\ drawTable()
+numComments=3

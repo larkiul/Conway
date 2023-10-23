@@ -1,14 +1,20 @@
-package Conway; /**
+  /**
  * Write a description of class Conways_Game_Of_Life here.
  *
  * @author (your name)
  * @version (a version number or a date)
  */
 
+import java.util.ArrayList; 
 import java.util.Scanner; //Keyboard input
 public class Conways_Game_Of_Life
 {
     // instance variables - replace the example below with your own
+    /*public static void main(String[] args) {
+        Conways_Game_Of_Life game = new Conways_Game_Of_Life(new Scanner(kb));
+    }*/
+
+    
     private int xCoordinate;
 
     private int yCoordinate;
@@ -22,8 +28,8 @@ public class Conways_Game_Of_Life
     private int generations;
     private int units;
 
-    private int unitBirth;
-    private int unitDeath;
+    ArrayList<Integer> unitBirth = new ArrayList<Integer>();
+    ArrayList<Integer> unitDeath = new ArrayList<Integer>();
     //private int count;
 
 
@@ -31,11 +37,15 @@ public class Conways_Game_Of_Life
      * Constructor for objects of class Conways_Game_Of_Life
      */
 
-    public Conways_Game_Of_Life(Scanner kb)
+    public Conways_Game_Of_Life()
     {
         // initialise instance variables
+        keyboard = new Scanner (System.in);
+
         z = 1;
-        keyboard = kb;
+        
+        
+        
 
         System.out.println("Welcome to Conway's Game of Life!");
         System.out.println("How many units would you like to place?");
@@ -62,11 +72,22 @@ public class Conways_Game_Of_Life
         System.out.println("How many generations?");
         generations = keyboard.nextInt();
         z = 1;
-        while (z <= generations){
-
-            System.out.println("Gen " + z);
+        for (int c = 1; c < generations; c++) {
+            
+            System.out.println("Gen " + c);
             drawTable();
-            z++;
+            //c++;
+            
+            while (unitDeath.size() > 0){
+                table[unitDeath.get(1)][unitDeath.get(0)] = '□';
+                unitDeath.remove(0);
+                unitDeath.remove(0);
+            }
+            while (unitBirth.size() > 0) {
+                table[unitBirth.get(1)][unitBirth.get(0)] = '■';
+                unitBirth.remove(0);
+                unitBirth.remove(0);
+            }
         }
 
     }
@@ -76,40 +97,55 @@ public class Conways_Game_Of_Life
         for (int y = 1; y < size - 1; y++){
 
             for (int x = 1; x < size - 1; x++) {
-
-                int count = 0;
-
-                if (table[y + 1][x + 1] == '■') {
-                    count++;
-                }
-                if (table[y][x + 1] == '■') {
-                    count++;
-                }
-                if (table[y + 1][x] == '■') {
-                    count++;
-                }
-                if (table[y - 1][x + 1] == '■') {
-                    count++;
-                }
-                if (table[y + 1][x - 1] == '■') {
-                    count++;
-                }
-                if (table[y - 1][x - 1] == '■') {
-                    count++;
-                }
-                if (table[y][x - 1] == '■') {
-                    count++;
-                }
-                if (table[y - 1][x] == '■') {
-                    count++;
-                }
-
-                if (z <= generations && z > 1){
-                    if (count < 2) {
-                        table[y][x] = '□';
+                
+                for (int c = 1; c < generations; c++) {
+                    int count = 0;
+    
+                    if (table[y + 1][x + 1] == '■') {
+                        count++;
                     }
+                    if (table[y][x + 1] == '■') {
+                        count++;
+                    }
+                    if (table[y + 1][x] == '■') {
+                        count++;
+                    }
+                    if (table[y - 1][x + 1] == '■') {
+                        count++;
+                    }
+                    if (table[y + 1][x - 1] == '■') {
+                        count++;
+                    }
+                    if (table[y - 1][x - 1] == '■') {
+                        count++;
+                    }
+                    if (table[y][x - 1] == '■') {
+                        count++;
+                    }
+                    if (table[y - 1][x] == '■') {
+                        count++;
+                    }
+    
+                    if (table[y][x] == '■'){
+                        if (count < 2 || count > 3) {
+                            unitDeath.add(x);
+                            unitDeath.add(y);
+                            
+                        }
+                    }
+                    
+                    
+                    if (table[y][x] == '□'){
+                        if (count == 3) {
+                            unitBirth.add(x);
+                            unitBirth.add(y);
+                            
+                        }
+                    }
+                    yCoordinate = 0;
+                    xCoordinate = 0;
                 }
-
+                
                 if (x != xCoordinate || y != yCoordinate) {
 
                     System.out.print(table[y][x] + " ");
@@ -123,6 +159,5 @@ public class Conways_Game_Of_Life
             }
             System.out.println();
         }
-
     }
 }
