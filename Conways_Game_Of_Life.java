@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Scanner; //Keyboard input
 import java.io.IOException; // handle errors
 import java.io.File;  //  File handles
+import java.io.FileWriter;
 import java.util.Objects;
 
 public class Conways_Game_Of_Life
@@ -20,7 +21,7 @@ public class Conways_Game_Of_Life
     
     
     
-    private String fileName;
+    
     
     private int xCoordinate;
 
@@ -61,14 +62,23 @@ public class Conways_Game_Of_Life
         
         
         for (int y = 0; y < size - 1; y++){
-                for (int x = 0; x < size - 1; x++){
-                    table[y][x] = '□';
-                }
+            for (int x = 0; x < size - 1; x++){
+                table[y][x] = '□';
+            }
         }
         
         if (Objects.equals(loadCSV, "yes")){
             System.out.println("What is the name of the file?");
-            fileName = keyboard.nextLine();
+            System.out.println("Avaliable files:");
+            File fileList = new File("c:");
+            String[] files = fileList.list();
+            for (int i = 0; i < files.length; i++){
+                String fileFound = files[i];
+                if (fileFound.contains(".csv")){
+                    System.out.println(files[i]);
+                }
+            }
+            String fileName = keyboard.nextLine();
             try {
                 File file = new File(fileName + ".csv");
                 System.out.println(file);
@@ -101,11 +111,43 @@ public class Conways_Game_Of_Life
     
                 z++;
             }
+            System.out.println("Would you like to save this as a file? (yes / no)");
+            String saveFile = keyboard.next();
+            
+            if (Objects.equals(saveFile, "yes")) {
+                System.out.println("Choose a name for this file");
+                String fileName = keyboard.next();
+                try {
+                    File newFile = new File(fileName + ".csv");
+                    if (newFile.createNewFile()) {
+                        System.out.println("New file created: " + newFile.getName());
+                        FileWriter writer = new FileWriter(fileName + ".csv");
+                        for (int y = 1; y < size - 1; y++){
+                            for (int x = 1; x < size - 1; x++){
+                                if (table[y][x] == '■'){
+                                    writer.write(x + ",");
+                                    writer.write(y + ",");
+                                }
+                            }
+                        }
+                        writer.flush();
+                        writer.close();
+                    } else {
+                        
+                    }
+                } catch (IOException e){
+                    System.out.println("An error occurred.");
+                    e.printStackTrace();
+                }
+            }
         } else {
             System.out.println("Sorry, that is not a valid answer");
             System.out.println("Please reload the program");
             System.exit(0);
         }
+        
+        
+        
         System.out.println("How many generations?");
         generations = keyboard.nextInt();
         z = 1;
