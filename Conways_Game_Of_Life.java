@@ -29,6 +29,7 @@ public class Conways_Game_Of_Life
     Scanner keyboard;
 
     public Conways_Game_Of_Life() {
+        System.out.print('\u000C'); //Clears terminal at method call
         for (int y = 0; y < SIZE - 1; y++){ //Sets every cell as dead at the start
             for (int x = 0; x < SIZE - 1; x++){
                 table[y][x] = '□';
@@ -55,7 +56,23 @@ public class Conways_Game_Of_Life
         }
         z = 1;
         System.out.println("How many generations?");
-        generations = keyboard.nextInt();
+        try { //Making sure the user enters a valid answer
+            generations = keyboard.nextInt();
+            while (generations <= 0 || generations > 100) {
+                if (generations <= 0) {
+                    System.out.println("Please enter a number greater than 0");
+                    generations = keyboard.nextInt();
+                }
+                if (generations > 100) {
+                    System.out.println("That number is too high (max 100)");
+                    generations = keyboard.nextInt();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Please make sure your answer is a positive number below 100");
+            System.out.println("Please reload the program");
+            System.exit(0);
+        }
         for (int i = 1; i <= generations; i++) {
             System.out.println("Gen " + i);
             drawTable(); //Draws a table at each new generation
@@ -64,7 +81,7 @@ public class Conways_Game_Of_Life
     }
     
     public void selectFile() { //Displays existing files, loads selected file
-        System.out.println("What is the name of the file?");
+        System.out.println("What is the name of the file? (Exclude '.csv' from your answer)");
         System.out.println("Avaliable files:");
         File fileList = new File("c:");
         String[] files = fileList.list();
@@ -76,6 +93,9 @@ public class Conways_Game_Of_Life
         }
         String fileName = keyboard.nextLine();
         try { //Scans selected file for coordinates
+            if (fileName.contains(".csv")){
+                System.out.println("Make sure your answer does not contain '.csv'");
+            }
             File file = new File(fileName + ".csv");
             System.out.println(file);
             Scanner readTheFile = new Scanner(file);
@@ -94,13 +114,49 @@ public class Conways_Game_Of_Life
     
     public void placeCells() { //Manual placement of cells
         System.out.println("How many cells would you like to place?");
-        units = keyboard.nextInt();
+        try { //Making sure the user enters a valid answer
+            units = keyboard.nextInt();
+            while (units <= 0 || units > 360) {
+                if (units <= 0) {
+                    System.out.println("Please enter a number greater than 0");
+                    units = keyboard.nextInt();
+                }
+                if (units > 400) {
+                    System.out.println("Please enter a number less than 360");
+                    units = keyboard.nextInt();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Please make sure your answer is a positive number below 360");
+            System.out.println("Please reload the program");
+            System.exit(0);
+        }
         while (z <= units){ //Asks user where to place new cells
             System.out.println("Enter coordinates to place a unit");
             System.out.println("X coordinate:");
-            xCoordinate = keyboard.nextInt();
+            try {
+                xCoordinate = keyboard.nextInt();
+                while (xCoordinate <= 0 || xCoordinate > 19) {
+                    System.out.println("Please enter a number from 1 to 19");
+                    xCoordinate = keyboard.nextInt();
+                }
+            } catch (Exception e) {
+                System.out.println("Please make sure your answer is a positive number from 1 to 19");
+                System.out.println("Please reload the program");
+                System.exit(0);
+            }
             System.out.println("Y coordinate:");
-            yCoordinate = keyboard.nextInt();
+            try {
+                yCoordinate = keyboard.nextInt();
+                while (yCoordinate <= 0 || yCoordinate > 19) {
+                    System.out.println("Please enter a number from 1 to 19");
+                    yCoordinate = keyboard.nextInt();
+                }
+            } catch (Exception e) {
+                System.out.println("Please make sure your answer is a positive number from 1 to 19");
+                System.out.println("Please reload the program");
+                System.exit(0);
+            }
 
             drawTable(); //Updates cells accordingly
 
