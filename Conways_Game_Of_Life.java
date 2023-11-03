@@ -1,6 +1,8 @@
-/**
- * John Conway's Game of Life
- *
+/** 
+ * John Conway's Game of Life is a cellular automaton created by John Conway. 
+ * It requires no players as it evolves after each tick meaning each state is determined 
+ * by its intial state.
+ * 
  * Ultan Larkin
  * 23/10/23
  */
